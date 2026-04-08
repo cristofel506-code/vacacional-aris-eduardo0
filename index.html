@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vacacional Aris Eduardo</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  height: 250px;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* CONTENEDOR */
+.container {
+  max-width: 600px;
+  margin: -40px auto 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* FRASE MEJORADA */
+.frase {
+  text-align: center;
+  color: #444;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* TARJETAS */
+.card {
+  margin-bottom: 15px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* INPUTS */
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background: linear-gradient(45deg, #28a745, #00c853);
+  color: white;
+  border: none;
+}
+
+/* RESULTADO */
+.result {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  white-space: pre-line;
+}
+
+/* PAGO */
+.pago {
+  display: none;
+  margin-top: 20px;
+  background: #fff3cd;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* BOTON WHATSAPP EXTRA */
+.btn-whatsapp {
+  background: #25D366;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+  <div class="hero-text">
+    <h1>Vacacional Aris Eduardo</h1>
+    <p>Disfruta piscina, confort y descanso 🌴</p>
+  </div>
+</div>
+
+<div class="container">
+
+<p class="frase">
+Escápate del estrés y vive una experiencia única. <br><br>
+Disfruta de piscina, comodidad total y un ambiente perfecto para compartir con familia y amigos. <br><br>
+Reserva fácil, rápido y sin complicaciones desde aquí ✨
+</p>
+
+<h3>Selecciona habitaciones</h3>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e">
+  <div class="card-content">
+    🛏️ Sencilla (máx 3) – hasta 2 personas  
+    <input type="number" id="s" min="0" max="3">
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+  <div class="card-content">
+    ❄️ Sencilla con aire (máx 3) – hasta 2 personas  
+    <input type="number" id="a" min="0" max="3">
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427">
+  <div class="card-content">
+    🛏️ Doble (máx 4) – hasta 5 personas  
+    <input type="number" id="d" min="0" max="4">
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+  <div class="card-content">
+    👨‍👩‍👧‍👦 Triple (máx 3) – hasta 8 personas  
+    <input type="number" id="t" min="0" max="3">
+  </div>
+</div>
+
+<input type="number" id="personas" placeholder="Total de personas">
+<input type="number" id="noches" placeholder="Noches (0 = pasadía)">
+
+<button onclick="calcular()">Calcular precio</button>
+
+<div class="result" id="res"></div>
+
+<div class="pago" id="pago">
+
+<h3>💵 Datos de pago</h3>
+<p><b>Banco:</b> BanReservas</p>
+<p><b>Nombre:</b> Eduardo</p>
+<p><b>Cuenta:</b> 0000000000</p>
+
+<p><b>📲 Envía tu comprobante (bauche) al WhatsApp:</b></p>
+<p><b>829-820-5116</b></p>
+
+<a id="wa" target="_blank">
+  <button class="btn-whatsapp">Enviar comprobante por WhatsApp</button>
+</a>
+
+<a href="https://wa.me/18298205116" target="_blank">
+  <button style="background:#007bff;">
+    ¿Tienes dudas? Escríbenos
+  </button>
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function limitar(id, max){
+  let input = document.getElementById(id);
+  input.addEventListener("input", function(){
+    if(this.value > max){
+      this.value = max;
+      alert("Máximo permitido: " + max);
+    }
+    if(this.value < 0){
+      this.value = 0;
+    }
+  });
+}
+
+limitar("s",3);
+limitar("a",3);
+limitar("d",4);
+limitar("t",3);
+
+function calcular(){
+
+let s = +document.getElementById("s").value||0;
+let a = +document.getElementById("a").value||0;
+let d = +document.getElementById("d").value||0;
+let t = +document.getElementById("t").value||0;
+
+let p = +document.getElementById("personas").value||0;
+let n = +document.getElementById("noches").value||0;
+
+let capacidad = (s*2)+(a*2)+(d*5)+(t*8);
+
+if(capacidad === 0){
+  alert("Selecciona habitaciones");
+  return;
+}
+
+if(p > capacidad){
+  document.getElementById("res").innerText =
+  "❌ Te faltan espacios para " + (p-capacidad) + " personas";
+  return;
+}
+
+let total = (n === 0)
+  ? p * 800
+  : (s*2000 + a*2500 + d*3000 + t*4000)*n;
+
+let tipo = (n === 0) ? "Pasadía" : n + " noches";
+
+document.getElementById("res").innerText =
+tipo + " | Capacidad: " + capacidad + " | Total: RD$ " + total;
+
+document.getElementById("pago").style.display="block";
+
+document.getElementById("pago").scrollIntoView({behavior:"smooth"});
+
+document.getElementById("wa").href =
+"https://wa.me/18298205116?text=Reserva:%20"+
+tipo+
+"%20Personas:"+p+
+"%20Total:RD$"+total;
+
+}
+
+</script>
+
+</body>
+</html>
